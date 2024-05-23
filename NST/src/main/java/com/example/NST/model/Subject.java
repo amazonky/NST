@@ -7,6 +7,9 @@ package com.example.NST.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -16,6 +19,9 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "tbl_subject")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Subject implements Serializable {
 
     @Id
@@ -27,53 +33,9 @@ public class Subject implements Serializable {
     @Column(name = "name")
     private String name;
 
-    private int esbp;
+    private int espb;
 
     @ManyToOne()
     @JoinColumn(name = "department_id")
     private Department department;
-
-    public Subject() {
-    }
-
-    public Subject(Long id, String name, int esbp, Department department) {
-        this.id = id;
-        this.name = name;
-        this.esbp = esbp;
-        this.department = department;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getEsbp() {
-        return esbp;
-    }
-
-    public void setEsbp(int esbp) {
-        this.esbp = esbp;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-    
-    
 }

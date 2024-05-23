@@ -8,6 +8,7 @@ import com.example.NST.model.Subject;
 import com.example.NST.repository.DepartmentRepository;
 import com.example.NST.repository.SubjectRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,20 +18,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SubjectService {
-
     @Autowired
     private SubjectConverter subjectConverter;
-
     @Autowired
     private SubjectRepository subjectRepository;
-
     @Autowired
     private DepartmentRepository departmentRepository;
 
     @Transactional
     public SubjectDTO save(SubjectDTO subjectDto) throws Exception {
-        final Subject subjectToSave = subjectConverter.toEntity(subjectDto);
+        Subject subjectToSave = subjectConverter.toEntity(subjectDto);
 
         if(subjectToSave.getDepartment() == null){
             throw new Exception("The subject you are trying to save" +
@@ -49,21 +48,21 @@ public class SubjectService {
             }
         }
 
-        final Subject savedSubject = subjectRepository.save(subjectToSave);
+        Subject savedSubject = subjectRepository.save(subjectToSave);
 
         return subjectConverter.toDto(savedSubject);
     }
 
     public List<SubjectDTO> getAll(Pageable pageable) {
         List<Subject> subjects = subjectRepository.findAll(pageable).getContent();
-        List<SubjectDTO> subjectDTOS = new ArrayList<>();
+        List<SubjectDTO> subjectDTOs = new ArrayList<>();
 
         for(Subject s: subjects) {
-            SubjectDTO subjectDTO = subjectConverter.toDto(s);
-            subjectDTOS.add(subjectDTO);
+            var subjectDTO = subjectConverter.toDto(s);
+            subjectDTOs.add(subjectDTO);
         }
 
-        return subjectDTOS;
+        return subjectDTOs;
     }
 
     public void delete(Long id) throws Exception {

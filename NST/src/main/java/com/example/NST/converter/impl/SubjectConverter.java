@@ -22,7 +22,7 @@ public class SubjectConverter
         return new SubjectDTO(
                 subject.getId(),
                 subject.getName(),
-                subject.getEsbp(),
+                subject.getEspb(),
                 departmentConverter.toDto(
                         subject.getDepartment()));
     }
