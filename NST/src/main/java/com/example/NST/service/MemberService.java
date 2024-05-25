@@ -36,9 +36,10 @@ public class MemberService {
     private final DepartmentChangeMemberDTOConverter departmentChangeMemberConverter;
     private final MemberRoleValidator memberRoleValidator;
     private final MemberDependencyValidator validator;
+    private final AcademicTitleHistoryConverter academicTitleHistoryConverter;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, MemberConverter memberConverter, AcademicTitleMemberDTOConverter academicTitleMemberDTOConverter, AcademicTitleConverter academicTitleConverter, ScientificFieldConverter scientificFieldConverter, DepartmentRepository departmentRepository, AcademicTitleRepository academicTitleRepository, EducationTitleRepository educationTitleRepository, ScientificFieldRepository scientificFieldRepository, AcademicTitleHistoryRepository academicTitleHistoryRepository, MemberHistoryRepository memberHistoryRepository, RoleChangeMemberDTOConverter roleChangeConverter, DepartmentChangeMemberDTOConverter departmentChangeMemberConverter, MemberRoleValidator memberRoleValidator, MemberDependencyValidator memberDependencyValidator) {
+    public MemberService(MemberRepository memberRepository, MemberConverter memberConverter, AcademicTitleMemberDTOConverter academicTitleMemberDTOConverter, AcademicTitleConverter academicTitleConverter, ScientificFieldConverter scientificFieldConverter, DepartmentRepository departmentRepository, AcademicTitleRepository academicTitleRepository, EducationTitleRepository educationTitleRepository, ScientificFieldRepository scientificFieldRepository, AcademicTitleHistoryRepository academicTitleHistoryRepository, MemberHistoryRepository memberHistoryRepository, RoleChangeMemberDTOConverter roleChangeConverter, DepartmentChangeMemberDTOConverter departmentChangeMemberConverter, MemberRoleValidator memberRoleValidator, MemberDependencyValidator memberDependencyValidator, AcademicTitleHistoryConverter academicTitleHistoryConverter) {
         this.memberRepository = memberRepository;
         this.memberConverter = memberConverter;
         this.academicTitleMemberDTOConverter = academicTitleMemberDTOConverter;
@@ -54,6 +55,7 @@ public class MemberService {
         this.departmentChangeMemberConverter = departmentChangeMemberConverter;
         this.memberRoleValidator = memberRoleValidator;
         this.validator = memberDependencyValidator;
+        this.academicTitleHistoryConverter = academicTitleHistoryConverter;
     }
 
     @Transactional
@@ -454,5 +456,18 @@ public class MemberService {
         Member memberSaved = memberRepository.save(memberToChange);
         return departmentChangeMemberConverter.toDto(memberSaved);
 
+    }
+
+    public List<AcademicTitleHistoryDTO> historiesForMember(Long memberId) {
+        List<AcademicTitleHistoryDTO> historyDTOs = new ArrayList<>();
+        List<AcademicTitleHistory> historiesForMemberId =
+                academicTitleHistoryRepository.findByMemberId(memberId);
+
+        for (var h : historiesForMemberId) {
+            var historyDTO = academicTitleHistoryConverter.toDto(h);
+            historyDTOs.add(historyDTO);
+        }
+
+        return historyDTOs;
     }
 }
