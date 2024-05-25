@@ -13,7 +13,7 @@ public class MemberRoleValidator {
                 && !memberRole.equalsIgnoreCase("SUPERVISOR")
                 && !memberRole.equalsIgnoreCase("SECRETARY")){
             throw new Exception("Illegal type of member inputted. Valid types are: " +
-                    "'REGULAR', 'SECRETARY' and 'DIRECTOR'");
+                    "'REGULAR', 'SECRETARY' and 'SUPERVISOR'");
         }
     }
 }
