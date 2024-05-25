@@ -37,9 +37,10 @@ public class MemberService {
     private final MemberRoleValidator memberRoleValidator;
     private final MemberDependencyValidator validator;
     private final AcademicTitleHistoryConverter academicTitleHistoryConverter;
+    private final MemberHistoryConverter memberHistoryConverter;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, MemberConverter memberConverter, AcademicTitleMemberDTOConverter academicTitleMemberDTOConverter, AcademicTitleConverter academicTitleConverter, ScientificFieldConverter scientificFieldConverter, DepartmentRepository departmentRepository, AcademicTitleRepository academicTitleRepository, EducationTitleRepository educationTitleRepository, ScientificFieldRepository scientificFieldRepository, AcademicTitleHistoryRepository academicTitleHistoryRepository, MemberHistoryRepository memberHistoryRepository, RoleChangeMemberDTOConverter roleChangeConverter, DepartmentChangeMemberDTOConverter departmentChangeMemberConverter, MemberRoleValidator memberRoleValidator, MemberDependencyValidator memberDependencyValidator, AcademicTitleHistoryConverter academicTitleHistoryConverter) {
+    public MemberService(MemberRepository memberRepository, MemberConverter memberConverter, AcademicTitleMemberDTOConverter academicTitleMemberDTOConverter, AcademicTitleConverter academicTitleConverter, ScientificFieldConverter scientificFieldConverter, DepartmentRepository departmentRepository, AcademicTitleRepository academicTitleRepository, EducationTitleRepository educationTitleRepository, ScientificFieldRepository scientificFieldRepository, AcademicTitleHistoryRepository academicTitleHistoryRepository, MemberHistoryRepository memberHistoryRepository, RoleChangeMemberDTOConverter roleChangeConverter, DepartmentChangeMemberDTOConverter departmentChangeMemberConverter, MemberRoleValidator memberRoleValidator, MemberDependencyValidator memberDependencyValidator, AcademicTitleHistoryConverter academicTitleHistoryConverter, MemberHistoryConverter memberHistoryConverter) {
         this.memberRepository = memberRepository;
         this.memberConverter = memberConverter;
         this.academicTitleMemberDTOConverter = academicTitleMemberDTOConverter;
@@ -56,6 +57,7 @@ public class MemberService {
         this.memberRoleValidator = memberRoleValidator;
         this.validator = memberDependencyValidator;
         this.academicTitleHistoryConverter = academicTitleHistoryConverter;
+        this.memberHistoryConverter = memberHistoryConverter;
     }
 
     @Transactional
@@ -465,6 +467,22 @@ public class MemberService {
 
         for (var h : historiesForMemberId) {
             var historyDTO = academicTitleHistoryConverter.toDto(h);
+            historyDTOs.add(historyDTO);
+        }
+
+        return historyDTOs;
+    }
+
+    public List<MemberHistoryDTO> getAllHistoriesFor(String memberRole) throws Exception {
+        memberRoleValidator.validateRole(memberRole);
+
+        List<MemberHistoryDTO> historyDTOs = new ArrayList<>();
+        List<MemberHistory> historiesForMemberType =
+                memberHistoryRepository.findAllByType(
+                        MemberRole.valueOf(memberRole.toUpperCase()));
+
+        for (var h : historiesForMemberType) {
+            var historyDTO = memberHistoryConverter.toDto(h);
             historyDTOs.add(historyDTO);
         }
 

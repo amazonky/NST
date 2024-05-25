@@ -87,4 +87,11 @@ public class MemberController {
         return ResponseEntity.ok(memberService
                 .historiesForMember(memberId));
     }
+
+    @GetMapping("/histories-for-type")
+    public ResponseEntity<List<MemberHistoryDTO>> findByType(
+            @RequestParam String memberRole) throws Exception {
+
+        return ResponseEntity.ok(memberService.getAllHistoriesFor(memberRole));
+    }
 }
