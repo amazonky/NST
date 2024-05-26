@@ -55,7 +55,7 @@ insert into tbl_member(first_name, last_name, start_date, role,
 values ("Zoran", "Zoric", "2019-01-04", "SUPERVISOR",
                         (select (id)
                         from tbl_academic_title
-                        where name = "Emeritus"),
+                        where name = "Lecturer"),
                         (select (id)
                         from tbl_department
                         WHERE short_name="SILAB"),
@@ -89,7 +89,7 @@ insert into tbl_member(first_name, last_name, start_date, role,
 values ("Sara", "Markovic", "2003-11-04", "REGULAR",
                         (select (id)
                         from tbl_academic_title
-                        where name = "Emeritus"),
+                        where name = "Lecturer"),
                         (select (id)
                         from tbl_department
                         WHERE short_name="MMKLAB"),
@@ -123,7 +123,7 @@ insert into tbl_member(first_name, last_name, start_date, role,
 values ("Zoran", "Zoric", "2020-01-01", "SUPERVISOR",
                         (select (id)
                         from tbl_academic_title
-                        where name = "Emeritus"),
+                        where name = "Lecturer"),
                         (select (id)
                         from tbl_department
                         WHERE short_name="MMKLAB"),

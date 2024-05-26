@@ -18,7 +18,7 @@ public class EducationTitle {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, max = 30, message = "Title name must be between 2 and 30" +
+    @Size(min = 2, max = 40, message = "Title name must be between 2 and 40" +
             "characters.")
     @Column(name = "title_name")
     private String titleName;

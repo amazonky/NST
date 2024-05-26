@@ -25,15 +25,15 @@ public class Member {
 
     @NotEmpty(message = "Member's first name must be " +
             "inputted.")
-    @Size(min = 2, max = 50, message = "Member's name must" +
-            "be between 2 and 50 characters.")
+    @Size(min = 2, max = 100, message = "Member's name must" +
+            "be between 2 and 100 characters.")
     @Column(name = "first_name")
     private String firstName;
 
     @NotEmpty(message = "Member's last name must be " +
             "inputted.")
-    @Size(min = 2, max = 50, message =  "Members' last name " +
-            "must be between 2 and 50 characters.")
+    @Size(min = 2, max = 100, message =  "Members' last name " +
+            "must be between 2 and 100 characters.")
     @Column(name = "last_name")
     private String lastName;
 

@@ -49,7 +49,7 @@ public class DepartmentService {
     }
 
     public DepartmentDTO update(DepartmentDTO department) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public DepartmentDTO findById(Long id) throws Exception {

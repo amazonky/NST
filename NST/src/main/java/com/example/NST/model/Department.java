@@ -25,11 +25,11 @@ public class Department {
     private Long id;
     
     @NotEmpty(message = "Ime je obavezno polje")
-    @Size(min = 2, max = 10, message = "Broj znakova je od 2 do 10")
+    @Size(min = 2, max = 100, message = "Broj znakova je od 2 do 100")
     private String name;
 
     @NotEmpty(message = "Kratko ime je obavezno polje")
-    @Size(min = 2, max = 5, message = "Broj znakova je od 2 do 10")
+    @Size(min = 2, max = 5, message = "Broj znakova je od 2 do 5")
     private String shortName;
     
 }

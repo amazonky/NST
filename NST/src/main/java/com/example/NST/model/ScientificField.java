@@ -18,7 +18,7 @@ public class ScientificField {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, max = 40, message = "Field name must be between 2 and 30" +
+    @Size(min = 2, max = 40, message = "Field name must be between 2 and 40" +
             "characters.")
     @Column(name = "field_name")
     private String fieldName;
