@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/academic-title")
 public class AcademicTitleController {
+
     @Autowired
     private AcademicTitleService academicTitleService;
 
