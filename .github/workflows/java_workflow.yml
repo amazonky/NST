@@ -1,4 +1,5 @@
 name: Do a mvn clean install on push or merge request
+
 on:
   push:
     branches:
@@ -6,18 +7,25 @@ on:
   pull_request:
     branches:
       - dev
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'oracle'
           java-version: '17'
-      - name: Build with maven
+          
+      - name: Change to NST directory
+        run: cd NST
+
+      - name: Build with Maven
         run: mvn clean install
