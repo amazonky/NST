@@ -112,6 +112,7 @@ public class SubjectServiceTest {
     }
 
 
+
     @Test
     @DisplayName("Find by id test normal")
     void findByIdTest() throws Exception {
