@@ -111,6 +111,7 @@ public class SubjectServiceTest {
         assertEquals(serviceResponse, UNKNOWN_ID_DEPARTMENT_SUBJECT_DTO_WITH_ID);
     }
 
+
     @Test
     @DisplayName("Find by id test normal")
     void findByIdTest() throws Exception {
